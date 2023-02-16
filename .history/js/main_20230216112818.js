@@ -87,7 +87,7 @@ function addNewKitten(event) {
         image: valuePhoto,
         name: valueName,
         desc: valueDesc,
-        race: valueRace,
+        race: va
 
       };
     const valueDesc = inputDesc.value;

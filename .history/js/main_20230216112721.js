@@ -87,13 +87,12 @@ function addNewKitten(event) {
         image: valuePhoto,
         name: valueName,
         desc: valueDesc,
-        race: valueRace,
+        race: va
 
       };
     const valueDesc = inputDesc.value;
     const valuePhoto = inputPhoto.value;
     const valueName = inputName.value;
-    const valueRace = inputRace.value;
     if (valueDesc === "" && valuePhoto === "" && valueName === "") {
         labelMessageError.innerHTML = "¡Uy! parece que has olvidado algo";
     } else {

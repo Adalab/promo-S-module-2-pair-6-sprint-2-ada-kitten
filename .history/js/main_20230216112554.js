@@ -84,16 +84,11 @@ function handleClickNewCatForm(event) {
 function addNewKitten(event) {
     event.preventDefault();
     const newKittenDataObject = {
-        image: valuePhoto,
-        name: valueName,
-        desc: valueDesc,
-        race: valueRace,
-
+        name
       };
     const valueDesc = inputDesc.value;
     const valuePhoto = inputPhoto.value;
     const valueName = inputName.value;
-    const valueRace = inputRace.value;
     if (valueDesc === "" && valuePhoto === "" && valueName === "") {
         labelMessageError.innerHTML = "¡Uy! parece que has olvidado algo";
     } else {
