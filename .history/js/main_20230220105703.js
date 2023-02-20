@@ -15,7 +15,6 @@ const linkNewFormElememt = document.querySelector('.js-button-new-form');
 const labelMessageError = document.querySelector('.js-label-error');
 const input_search_desc = document.querySelector('.js_in_search_desc');
 const input_search_race = document.querySelector(".js_in_search_race");
-//variables para almacenar el usuario de Github y la url para hacer petición al servidor
 const GITHUB_USER = 'raquelgm88';
 const SERVER_URL = `https://dev.adalab.es/api/kittens/${GITHUB_USER}`;
 
@@ -69,7 +68,7 @@ function renderKittenList(kittenDataList) {
         listElement.innerHTML += renderKitten(kittenItem);
     }
 }
-//petición al servidor de los datos de los gatitos
+
 fetch(SERVER_URL, {
     method: 'GET',
     headers: {'Content-Type': 'application/json'},

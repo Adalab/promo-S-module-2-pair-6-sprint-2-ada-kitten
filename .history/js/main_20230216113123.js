@@ -14,10 +14,6 @@ const inputRace = document.querySelector('.js-input-race');
 const linkNewFormElememt = document.querySelector('.js-button-new-form');
 const labelMessageError = document.querySelector('.js-label-error');
 const input_search_desc = document.querySelector('.js_in_search_desc');
-const input_search_race = document.querySelector(".js_in_search_race");
-//variables para almacenar el usuario de Github y la url para hacer petición al servidor
-const GITHUB_USER = 'raquelgm88';
-const SERVER_URL = `https://dev.adalab.es/api/kittens/${GITHUB_USER}`;
 
 
 //Objetos con cada gatito
@@ -40,9 +36,7 @@ const kittenData_3 = {
     race: "Maine Coon",
 };
 
-let kittenDataList = [];
-
-
+const kittenDataList = [kittenData_1, kittenData_2, kittenData_3];
 
 //Funciones
 function renderKitten(kittenData) {
@@ -69,16 +63,6 @@ function renderKittenList(kittenDataList) {
         listElement.innerHTML += renderKitten(kittenItem);
     }
 }
-//petición al servidor de los datos de los gatitos
-fetch(SERVER_URL, {
-    method: 'GET',
-    headers: {'Content-Type': 'application/json'},
-  }).then((response) => response.json())
-  .then((data) => {
-    console.log(data);
-    kittenDataList = data.results;
-    renderKittenList(kittenDataList);
-  })
 
 //Mostrar/ocultar el formulario
 function showNewCatForm() {
@@ -99,46 +83,25 @@ function handleClickNewCatForm(event) {
 //Adicionar nuevo gatito
 function addNewKitten(event) {
     event.preventDefault();
+    const newKittenDataObject = {
+        image: valuePhoto,
+        name: valueName,
+        desc: valueDesc,
+        race: valueRace,
 
+      };
     const valueDesc = inputDesc.value;
     const valuePhoto = inputPhoto.value;
     const valueName = inputName.value;
     const valueRace = inputRace.value;
-
     if (valueDesc === "" && valuePhoto === "" && valueName === "") {
         labelMessageError.innerHTML = "¡Uy! parece que has olvidado algo";
     } else {
         if (valueDesc !== "" && valuePhoto !== "" && valueName !== "") {
-          labelMessageError.innerHTML = "";
-
-        // Crea un nuevo objeto para el gatito
-          const newKittenDataObject = {
-            image: valuePhoto,
-            name: valueName,
-            desc: valueDesc,
-            race: valueRace,
-          };
-
-          // Agregar nuevo gatito al array de kittenDataList
-          kittenDataList.push(newKittenDataObject);
-
-          //Limpia los inputs del form
-          inputDesc.value = '';
-          inputPhoto.value = '';
-          inputName.value = '';
-          inputRace.value = '';
-
-        // Envía mensaje para el nuevo gatito
-          labelMessageError.innerHTML = "Mola! Un nuevo gatito en Adalab!";
-
-          // Pinta de nuevo la lista de gatitos, incluyendo el nuevo
-          renderKittenList(kittenDataList);
+            labelMessageError.innerHTML = "";
         }
     }
 }
-
-
-
 //Cancelar la búsqueda de un gatito
 function cancelNewKitten(event) {
     event.preventDefault();
@@ -149,22 +112,15 @@ function cancelNewKitten(event) {
 }
 
 //Filtrar por descripción
-
 function filterKitten(event) {
     event.preventDefault();
     const descrSearchText = input_search_desc.value;
-    const raceSearchText = input_search_race.value;
-
-    //Limpiamos la lista de gatitos antes de buscar
-    listElement.innerHTML = '';
-
-    //Método para filtrar en el array de la lista de gatos si su descripción o raza coincide con el input
-    const filterList = kittenDataList
-      .filter((kitten) => kitten.desc.includes(descrSearchText))
-      .filter((kitten) => kitten.race === raceSearchText);
-
-    //Imprimir la lista con el filtro
-    renderKittenList(filterList);
+    listElement.innerHTML = "";
+    for (const kittenItem of kittenDataList) {
+        if (kittenItem.desc.includes(descrSearchText)) {
+            listElement.innerHTML += renderKitten(kittenItem);
+        }
+    }
 }
 
 //Mostrar el litado de gatitos en ell HTML
