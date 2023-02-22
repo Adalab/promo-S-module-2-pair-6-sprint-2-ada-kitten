@@ -44,9 +44,25 @@ let kittenDataList = [];
 
 //Funciones
 function renderKitten(kittenData) {
+  /*const kitten = `<li class="card">
+    <article>
+      <img
+        class="card_img"
+        src=${kittenData.image}
+        alt="gatito"
+      />
+      <h3 class="card_title">${kittenData.name}</h3>
+      <h3 class="card_race">${kittenData.race}</h3>
+      <p class="card_description">
+      ${kittenData.desc}
+      </p>
+    </article>
+    </li>`;*/
+
   const liElement = document.createElement('li');
   liElement.setAttribute('class', 'card');
   listElement.appendChild(liElement);
+  
   
   const artElement = document.createElement('article');
   liElement.appendChild(artElement);
@@ -67,19 +83,18 @@ function renderKitten(kittenData) {
   h3Race.setAttribute('class', 'card_race');
   const h3RaceText = document.createTextNode(kittenData.race);
   artElement.appendChild(h3Race);
-  h3Race.appendChild(h3RaceText);
   
   const pElement = document.createElement('p');
   pElement.setAttribute('class', 'card_description');
   const pElementText = document.createTextNode(kittenData.desc);
-  artElement.appendChild(pElement);
-  pElement.appendChild(pElementText);
+    
+  return kitten;
 }
 
 function renderKittenList(kittenDataList) {
   listElement.innerHTML = "";
   for (const kittenItem of kittenDataList) {
-    renderKitten(kittenItem);
+    listElement.innerHTML += renderKitten(kittenItem);
   }
 }
 //petición al servidor de los datos de los gatitos

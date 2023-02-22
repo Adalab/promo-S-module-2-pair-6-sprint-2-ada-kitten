@@ -48,6 +48,7 @@ function renderKitten(kittenData) {
   liElement.setAttribute('class', 'card');
   listElement.appendChild(liElement);
   
+  
   const artElement = document.createElement('article');
   liElement.appendChild(artElement);
   
